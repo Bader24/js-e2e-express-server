@@ -8,13 +8,17 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
-
-steps:
+jobs:
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
-  displayName: 'Install Node.js'
+- deployment: VMDeploy
+  displayName: Deploy to VM
+  environment: 
+    name: ContosoDeploy
+    resourceType: VirtualMachine
 
+steps:
 - script: |
     npm install
     npm run build
